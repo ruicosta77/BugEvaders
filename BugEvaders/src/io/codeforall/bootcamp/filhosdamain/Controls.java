@@ -49,6 +49,7 @@ public class Controls implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_SPACE:
                 myBugProjectile = new BugProjectile();
+                myBugProjectile.bugProjectileMovement();
                 break;
         }
 

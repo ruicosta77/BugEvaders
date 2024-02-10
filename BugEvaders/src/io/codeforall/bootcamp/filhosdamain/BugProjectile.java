@@ -21,18 +21,23 @@ public class BugProjectile {
 
     public BugProjectile (){
         bugProjectileImage = new Picture(450, 900,"resources/bug.png");
+        bugX = bugProjectileImage.getX();
+        bugY = bugProjectileImage.getY();
         bugProjectileImage.draw();
-        bugProjectileMovement();
     }
 
 
 
 
     public void bugProjectileMovement (){
-        while(getBugY() !=  -200){
+        while(getBugY() >  -200){
+            int initialY = getBugY();
             setBugY(getBugY()-10);
+            bugProjectileImage.delete();
+            int finalY = getBugY();
             System.out.println(getBugY());
-            bugProjectileImage.translate(0,getBugY());
+            bugProjectileImage.translate(0,finalY - initialY);
+            bugProjectileImage.draw();
         }
     }
 
