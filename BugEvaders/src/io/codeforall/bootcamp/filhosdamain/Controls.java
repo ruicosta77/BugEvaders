@@ -1,20 +1,23 @@
 package io.codeforall.bootcamp.filhosdamain;
+
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-public class MyLittleControls implements KeyboardHandler {
+public class Controls implements KeyboardHandler {
 
-    MyLittleObject myLittleObject;
+    Player myLittleObject;
     Keyboard myKeyboard;
 
-    public MyLittleControls(MyLittleObject myLittleObject) {
+    BugProjectile myBugProjectile;
+
+    public Controls(Player myLittleObject) {
         this.myLittleObject = myLittleObject;
         init();
     }
 
-    public void init(){
+    public void init() {
         myKeyboard = new Keyboard(this);
 
         KeyboardEvent pressedRight = new KeyboardEvent();
@@ -27,18 +30,26 @@ public class MyLittleControls implements KeyboardHandler {
         pressedLeft.setKey(KeyboardEvent.KEY_LEFT);
         myKeyboard.addEventListener(pressedLeft);
 
+        KeyboardEvent pressedSpace = new KeyboardEvent();
+        pressedSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        pressedSpace.setKey(KeyboardEvent.KEY_SPACE);
+        myKeyboard.addEventListener(pressedSpace);
+
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        switch (keyboardEvent.getKey()){
+        switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
                 myLittleObject.moveRight();
                 break;
-                case KeyboardEvent.KEY_LEFT:
-                    myLittleObject.moveLeft();
-                    break;
+            case KeyboardEvent.KEY_LEFT:
+                myLittleObject.moveLeft();
+                break;
+            case KeyboardEvent.KEY_SPACE:
+                myBugProjectile = new BugProjectile();
+                break;
         }
 
     }
