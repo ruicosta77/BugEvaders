@@ -1,7 +1,8 @@
 package io.codeforall.bootcamp.filhosdamain;
 
-import io.codeforall.bootcamp.filhosdamain.enemies.Mcs;
-import io.codeforall.bootcamp.filhosdamain.enemies.SmallEnemy;
+import io.codeforall.bootcamp.filhosdamain.gameObject.Mcs;
+import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
+import io.codeforall.bootcamp.filhosdamain.gameObject.SmallEnemy;
 import io.codeforall.bootcamp.filhosdamain.gameArea.Field;
 
 public class Game {
@@ -21,6 +22,6 @@ public class Game {
         myLittleObject = new Player();
         playerControls = new Controls(myLittleObject);
         smallEnemy = new SmallEnemy();
-        mcs = new Mcs("resources/villian1.png");
+        mcs = new Mcs("BugEvaders/resources/villian1.png");
     }
 }

@@ -1,7 +1,7 @@
-package io.codeforall.bootcamp.filhosdamain;
+package io.codeforall.bootcamp.filhosdamain.gameObject;
 
-import io.codeforall.bootcamp.filhosdamain.enemies.Hitable;
-import io.codeforall.bootcamp.filhosdamain.enemies.Mcs;
+import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
+import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import io.codeforall.bootcamp.filhosdamain.gameArea.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -20,7 +20,7 @@ public class BugProjectile {
     private int bugY;
 
     public BugProjectile (){
-        bugProjectileImage = new Picture(450, 900,"resources/bug.png");
+        bugProjectileImage = new Picture(450, 900,"BugEvaders/resources/bug.png");
         bugX = bugProjectileImage.getX();
         bugY = bugProjectileImage.getY();
         bugProjectileImage.draw();
@@ -29,15 +29,16 @@ public class BugProjectile {
 
 
 
-    public void bugProjectileMovement (){
+    public void bugProjectileMovement () throws InterruptedException {
+
+
         while(getBugY() >  -200){
-            int initialY = getBugY();
-            setBugY(getBugY()-10);
-            bugProjectileImage.delete();
-            int finalY = getBugY();
-            System.out.println(getBugY());
-            bugProjectileImage.translate(0,finalY - initialY);
-            bugProjectileImage.draw();
+
+            int moveBug = getBugY()-10;
+            int finalY = originPlayer.getPlayerY();
+            bugProjectileImage.translate(0,moveBug);
+            Thread.sleep(100);
+            System.out.println("test velocity");
         }
     }
 

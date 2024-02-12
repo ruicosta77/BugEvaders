@@ -1,5 +1,6 @@
-package io.codeforall.bootcamp.filhosdamain.enemies;
+package io.codeforall.bootcamp.filhosdamain.gameObject;
 
+import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Enemy implements Hitable {

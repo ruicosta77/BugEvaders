@@ -14,7 +14,7 @@ public class Field {
         this.height = height;
         this.width = width;
         gameArea = new Rectangle(PADDING,PADDING, this.height, this.width);
-        backGround = new Picture(PADDING,PADDING,"resources/jeremy-perkins-uhjiu8FjnsQ-unsplash.jpg");
+        backGround = new Picture(PADDING,PADDING,"BugEvaders/resources/jeremy-perkins-uhjiu8FjnsQ-unsplash.jpg");
         gameArea.draw();
         backGround.draw();
     }

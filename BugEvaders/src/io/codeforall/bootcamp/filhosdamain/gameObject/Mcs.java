@@ -1,4 +1,4 @@
-package io.codeforall.bootcamp.filhosdamain.enemies;
+package io.codeforall.bootcamp.filhosdamain.gameObject;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 

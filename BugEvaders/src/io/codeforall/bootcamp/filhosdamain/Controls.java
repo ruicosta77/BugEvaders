@@ -1,5 +1,7 @@
 package io.codeforall.bootcamp.filhosdamain;
 
+import io.codeforall.bootcamp.filhosdamain.gameObject.BugProjectile;
+import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -48,8 +50,12 @@ public class Controls implements KeyboardHandler {
                 myLittleObject.moveLeft();
                 break;
             case KeyboardEvent.KEY_SPACE:
-                myBugProjectile = new BugProjectile();
-                myBugProjectile.bugProjectileMovement();
+                try {
+                    myBugProjectile = new BugProjectile();
+                    myBugProjectile.bugProjectileMovement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
         }
 

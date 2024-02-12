@@ -1,11 +1,12 @@
-package io.codeforall.bootcamp.filhosdamain;
+package io.codeforall.bootcamp.filhosdamain.gameObject;
+import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Player {
+public class Player implements Hitable {
     private int playerX;
 
     private int playerY;
-    private Picture playerImage = new Picture(450,900 ,"resources/igorpng2.png");
+    private Picture playerImage = new Picture(450,900 ,"BugEvaders/resources/igorpng2.png");
 
     public BugProjectile bugProjectile;
 
