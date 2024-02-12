@@ -12,14 +12,12 @@ public class Player implements Hitable {
 
 
     public Player(){
-
         playerImage.draw();
     }
 
     public int getPlayerX() {
         return playerX;
     }
-
     public int getPlayerY() {
         return playerY;
     }

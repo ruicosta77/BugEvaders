@@ -7,15 +7,20 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+import java.util.LinkedList;
+
 public class Controls implements KeyboardHandler {
 
     Player myLittleObject;
     Keyboard myKeyboard;
 
+    public LinkedList<BugProjectile> bugs;
+
     BugProjectile myBugProjectile;
 
-    public Controls(Player myLittleObject) {
+    public Controls(Player myLittleObject, LinkedList<BugProjectile> bugProjectiles) {
         this.myLittleObject = myLittleObject;
+        this.bugs = bugProjectiles;
         init();
     }
 
@@ -50,12 +55,9 @@ public class Controls implements KeyboardHandler {
                 myLittleObject.moveLeft();
                 break;
             case KeyboardEvent.KEY_SPACE:
-                try {
-                    myBugProjectile = new BugProjectile();
-                    myBugProjectile.bugProjectileMovement();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                myBugProjectile = new BugProjectile();
+                bugs.add(myBugProjectile);
+                myBugProjectile.moveUp();
                 break;
         }
 

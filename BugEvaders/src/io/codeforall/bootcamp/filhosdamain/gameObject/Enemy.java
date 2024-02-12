@@ -8,6 +8,7 @@ public abstract class Enemy implements Hitable {
 
     private int enemyY;
     protected Picture enemyImage;
+
     public Enemy() {
 
     }
@@ -15,15 +16,12 @@ public abstract class Enemy implements Hitable {
     public int getEnemyX() {
         return enemyX;
     }
-
     public void setEnemyX(int enemyX) {
         this.enemyX = enemyX;
     }
-
     public int getEnemyY() {
         return enemyY;
     }
-
     public void setEnemyY(int enemyY) {
         this.enemyY = enemyY;
     }
