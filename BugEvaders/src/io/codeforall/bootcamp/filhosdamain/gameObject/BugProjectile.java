@@ -7,14 +7,14 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class BugProjectile {
 
-    public Player originPlayer;
+    public Player playerPosition;
     public Picture bugProjectileImage;
     public Hitable enemy;
     public Field field;
     private int bugY;
 
-    public BugProjectile (){
-        bugProjectileImage = new Picture(450, 900,"BugEvaders/resources/bug.png");
+    public BugProjectile (int getX , int getY){
+        bugProjectileImage = new Picture(getX, getY,"BugEvaders/resources/bug.png");
         bugY = bugProjectileImage.getY();
         bugProjectileImage.draw();
     }

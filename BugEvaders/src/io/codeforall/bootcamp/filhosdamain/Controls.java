@@ -55,7 +55,7 @@ public class Controls implements KeyboardHandler {
                 myLittleObject.moveLeft();
                 break;
             case KeyboardEvent.KEY_SPACE:
-                myBugProjectile = new BugProjectile();
+                myBugProjectile = new BugProjectile((myLittleObject.getPlayerX() + 40), myLittleObject.getPlayerY());
                 bugs.add(myBugProjectile);
                 myBugProjectile.moveUp();
                 break;
