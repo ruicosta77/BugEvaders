@@ -4,7 +4,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player implements Hitable {
     private int playerX = 450;
-    private int playerY = 900;
+    private int playerY = 800;
 
     private Picture playerImage = new Picture(playerX,playerY ,"BugEvaders/resources/igorpng2.png");
     public BugProjectile bugProjectile;
@@ -28,5 +28,15 @@ public class Player implements Hitable {
     public void moveLeft(){
         playerImage.translate(-10,0);
         this.playerX = playerX - 10;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerX=" + playerX +
+                ", playerY=" + playerY +
+                ", playerImage=" + playerImage +
+                ", bugProjectile=" + bugProjectile +
+                '}';
     }
 }

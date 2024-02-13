@@ -12,6 +12,7 @@ public class BugProjectile {
     public Hitable enemy;
     public Field field;
     private int bugY;
+    private int bugX;
 
     public BugProjectile (int getX , int getY){
         bugProjectileImage = new Picture(getX, getY,"BugEvaders/resources/bug.png");
@@ -25,6 +26,9 @@ public class BugProjectile {
 
     public int getBugY() {
         return bugY;
+    }
+    public int getBugX() {
+        return bugX;
     }
 
 

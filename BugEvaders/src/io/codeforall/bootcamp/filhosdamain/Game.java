@@ -37,7 +37,13 @@ public class Game {
                 Thread.sleep(delay);
                 System.out.println(bugs);
                 for (BugProjectile bug : bugs) {
+                    if (bug.getBugY() == mcs.getEnemyY() && bug.getBugX() == mcs.getEnemyX()) {
+                        mcs.setAlive();
+                    }
                     bug.moveUp();
+                    //mcs.moveEnemy();
+                    smallEnemy.moveEnemy();
+
                 }
             } catch (ConcurrentModificationException e) {
                 continue;
