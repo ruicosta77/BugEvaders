@@ -1,31 +1,45 @@
 package io.codeforall.bootcamp.filhosdamain.gameObject;
 
-import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
-import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
-import io.codeforall.bootcamp.filhosdamain.gameArea.Field;
+import io.codeforall.bootcamp.filhosdamain.positions.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class BugProjectile {
+    private static final int PROJECTILE_SPEED = 10;
+    private Position position;
+    private Picture projectileImage;
 
-    public Player originPlayer;
-    public Picture bugProjectileImage;
-    public Hitable enemy;
-    public Field field;
-    private int bugY;
-
-    public BugProjectile (){
-        bugProjectileImage = new Picture(450, 900,"BugEvaders/resources/bug.png");
-        bugY = bugProjectileImage.getY();
-        bugProjectileImage.draw();
+    public BugProjectile(Position position) {
+        this.position = position;
+        this.projectileImage = new Picture(position.getX(), position.getY(), "BugEvaders/resources/bug.png");
+        this.projectileImage.draw();
     }
 
-    public void moveUp(){
-        bugProjectileImage.translate(0,-10);
+    public void moveUp() {
+        position.setY(position.getY() - PROJECTILE_SPEED);
+        projectileImage.translate(0, -PROJECTILE_SPEED);
     }
 
-    public int getBugY() {
-        return bugY;
+    public boolean checkCollision(Enemy enemy) {
+        return position.getX() == enemy.getPosition().getX() && position.getY() == enemy.getPosition().getY();
     }
 
+    public boolean isOutOfBounds() {
+        return position.getY() < 0;
+    }
 
+    public void delete() {
+        projectileImage.delete();
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    @Override
+    public String toString() {
+        return "BugProjectile{" +
+                "position=" + position +
+                ", projectileImage=" + projectileImage +
+                '}';
+    }
 }
