@@ -13,12 +13,25 @@ import java.util.LinkedList;
 public class Controls implements KeyboardHandler {
 
     private Player player;
-    private boolean moveRight;
-    private  boolean moveLeft;
+    private boolean rightPressed = false;
+    private boolean leftPressed = false;
+    private boolean spacePressed = false;
 
     public Controls(Player player) {
         this.player = player;
         init();
+    }
+
+    private void updatePaddles() {
+        if (rightPressed) {
+            player.moveRight();
+        }
+        if (leftPressed) {
+            player.moveLeft();
+        }
+        if (spacePressed) {
+            player.shoot();
+        }
     }
 
     private void init() {
@@ -38,29 +51,55 @@ public class Controls implements KeyboardHandler {
         spaceEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         spaceEvent.setKey(KeyboardEvent.KEY_SPACE);
         keyboard.addEventListener(spaceEvent);
+
+
+        KeyboardEvent rightEvent2 = new KeyboardEvent();
+        rightEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        rightEvent2.setKey(KeyboardEvent.KEY_RIGHT);
+        keyboard.addEventListener(rightEvent2);
+
+        KeyboardEvent leftEvent2 = new KeyboardEvent();
+        leftEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        leftEvent2.setKey(KeyboardEvent.KEY_LEFT);
+        keyboard.addEventListener(leftEvent2);
+
+        KeyboardEvent spaceEvent2 = new KeyboardEvent();
+        spaceEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        spaceEvent2.setKey(KeyboardEvent.KEY_SPACE);
+        keyboard.addEventListener(spaceEvent2);
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
-                player.moveRight();
-                moveRight = true;
-                moveLeft = false;
+                rightPressed = true;
                 break;
             case KeyboardEvent.KEY_LEFT:
-                player.moveLeft();
-                moveLeft = true;
-                moveRight = false;
+                leftPressed = true;
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                player.shoot();
+                spacePressed = true;
                 break;
         }
+        updatePaddles();
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_RIGHT:
+                rightPressed = false;
+                break;
+            case KeyboardEvent.KEY_LEFT:
+                leftPressed = false;
+                break;
+
+            case KeyboardEvent.KEY_SPACE:
+                spacePressed = false;
+                break;
+        }
+        updatePaddles();
     }
 }

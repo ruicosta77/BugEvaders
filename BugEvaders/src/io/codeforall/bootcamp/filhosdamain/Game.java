@@ -18,6 +18,9 @@ public class Game {
     private int delay;
     private Picture hitImage;
 
+    private Score score;
+    private Score score2;
+
     public LinkedList<BugProjectile> bugs = new LinkedList<>();
     public ArrayList<Enemy> enemies = new ArrayList<>();
 
@@ -31,6 +34,12 @@ public class Game {
         EnemiesFactory.getNewEnemy(enemies);
         mcs = new Mcs(450, 200);
         enemies.add(mcs);
+        score = new Score("Score", enemies);
+        score2 = new Score("Highscore", enemies);
+        score2.toString();
+        score.scoreKeeper();
+        score.toString();
+        score.toString(10);
 
     }
 
