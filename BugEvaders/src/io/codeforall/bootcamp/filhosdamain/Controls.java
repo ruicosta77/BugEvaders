@@ -1,6 +1,7 @@
 package io.codeforall.bootcamp.filhosdamain;
 
 import io.codeforall.bootcamp.filhosdamain.gameObject.BugProjectile;
+import io.codeforall.bootcamp.filhosdamain.gameObject.Mcs;
 import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -11,60 +12,55 @@ import java.util.LinkedList;
 
 public class Controls implements KeyboardHandler {
 
-    Player myLittleObject;
-    Keyboard myKeyboard;
+    private Player player;
+    private boolean moveRight;
+    private  boolean moveLeft;
 
-    public LinkedList<BugProjectile> bugs;
-
-    BugProjectile myBugProjectile;
-
-    public Controls(Player myLittleObject, LinkedList<BugProjectile> bugProjectiles) {
-        this.myLittleObject = myLittleObject;
-        this.bugs = bugProjectiles;
+    public Controls(Player player) {
+        this.player = player;
         init();
     }
 
-    public void init() {
-        myKeyboard = new Keyboard(this);
+    private void init() {
+        Keyboard keyboard = new Keyboard(this);
 
-        KeyboardEvent pressedRight = new KeyboardEvent();
-        pressedRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        pressedRight.setKey(KeyboardEvent.KEY_RIGHT);
-        myKeyboard.addEventListener(pressedRight);
+        KeyboardEvent rightEvent = new KeyboardEvent();
+        rightEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        rightEvent.setKey(KeyboardEvent.KEY_RIGHT);
+        keyboard.addEventListener(rightEvent);
 
-        KeyboardEvent pressedLeft = new KeyboardEvent();
-        pressedLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        pressedLeft.setKey(KeyboardEvent.KEY_LEFT);
-        myKeyboard.addEventListener(pressedLeft);
+        KeyboardEvent leftEvent = new KeyboardEvent();
+        leftEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        leftEvent.setKey(KeyboardEvent.KEY_LEFT);
+        keyboard.addEventListener(leftEvent);
 
-        KeyboardEvent pressedSpace = new KeyboardEvent();
-        pressedSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        pressedSpace.setKey(KeyboardEvent.KEY_SPACE);
-        myKeyboard.addEventListener(pressedSpace);
-
+        KeyboardEvent spaceEvent = new KeyboardEvent();
+        spaceEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        spaceEvent.setKey(KeyboardEvent.KEY_SPACE);
+        keyboard.addEventListener(spaceEvent);
     }
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-
         switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
-                myLittleObject.moveRight();
+                player.moveRight();
+                moveRight = true;
+                moveLeft = false;
                 break;
             case KeyboardEvent.KEY_LEFT:
-                myLittleObject.moveLeft();
+                player.moveLeft();
+                moveLeft = true;
+                moveRight = false;
                 break;
+
             case KeyboardEvent.KEY_SPACE:
-                myBugProjectile = new BugProjectile((myLittleObject.getPlayerX() + 40), myLittleObject.getPlayerY());
-                bugs.add(myBugProjectile);
-                myBugProjectile.moveUp();
+                player.shoot();
                 break;
         }
-
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
     }
 }

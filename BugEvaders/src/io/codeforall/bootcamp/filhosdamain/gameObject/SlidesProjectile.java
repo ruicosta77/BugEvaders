@@ -3,12 +3,13 @@ package io.codeforall.bootcamp.filhosdamain.gameObject;
 import io.codeforall.bootcamp.filhosdamain.positions.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class BugProjectile {
+public class SlidesProjectile {
+
     private static final int PROJECTILE_SPEED = 10;
     private Position position;
     private Picture projectileImage;
 
-    public BugProjectile(Position position) {
+    public SlidesProjectile(Position position) {
         this.position = position;
         this.projectileImage = new Picture(position.getX(), position.getY(), "BugEvaders/resources/bug.png");
         this.projectileImage.draw();
@@ -17,12 +18,6 @@ public class BugProjectile {
     public void moveUp() {
         position.setY(position.getY() - PROJECTILE_SPEED);
         projectileImage.translate(0, -PROJECTILE_SPEED);
-    }
-
-    public boolean checkCollision(Enemy enemy) {
-
-        return enemy.getPosition().getX() <= (this.getPosition().getX()) && (enemy.getPosition().getX() + enemy.getPicture().getWidth()) >= this.getPosition().getX() && enemy.getPosition().getY() == this.getPosition().getY();
-
     }
 
     public boolean isOutOfBounds() {
@@ -46,3 +41,4 @@ public class BugProjectile {
                 '}';
     }
 }
+

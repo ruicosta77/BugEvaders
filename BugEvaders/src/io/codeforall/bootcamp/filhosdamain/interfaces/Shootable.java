@@ -1,7 +1,7 @@
 package io.codeforall.bootcamp.filhosdamain.interfaces;
 
-public interface Shootable{
+public interface Shootable {
 
-     int hitDamage = 0;
+    void shoot();
 
 }
