@@ -11,12 +11,13 @@ import java.util.LinkedList;
 public class Mcs extends Enemy implements Shootable, Hitable {
 
     private int health;
+    private boolean isDestroyed;
     private static int random = 1;
     private LinkedList<SlidesProjectile> projectiles;
 
     public Mcs(int x, int y) {
         super(x, y);
-        this.health = 500;
+        this.health = 5;
         enemyImage = new Picture(x, y, "BugEvaders/resources/villian2.png");
         enemyImage.draw();
     }
@@ -29,7 +30,7 @@ public class Mcs extends Enemy implements Shootable, Hitable {
     public void hit(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
-            destroy();
+            isDestroyed = true;
         }
     }
 
@@ -61,5 +62,9 @@ public class Mcs extends Enemy implements Shootable, Hitable {
         Position projectilePosition = new Position(getEnemyX(), getEnemyY());
         SlidesProjectile projectile = new SlidesProjectile(projectilePosition);
         projectiles.add(projectile);
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
     }
 }

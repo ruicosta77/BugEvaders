@@ -13,6 +13,8 @@ public abstract class Enemy implements Hitable {
     protected Picture enemyImage;
     public final int ENEMY_SPEED = 2;
     private static int  random = 1;
+    private int health;
+    private boolean isDestroyed;
 
     public Enemy(int x, int y) {
         this.enemyX = x;
@@ -58,6 +60,16 @@ public abstract class Enemy implements Hitable {
         }
     }
 
+    public void hit(int damage) {
+        this.health -= damage;
+        if (this.health <= 0) {
+            isDestroyed = true;
+        }
+    }
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
 
     public Position getPosition() {
         return position;
@@ -82,4 +94,5 @@ public abstract class Enemy implements Hitable {
     public Picture getPicture() {
         return enemyImage;
     }
+
 }

@@ -13,8 +13,10 @@ public class Game {
     Field field;
     Player player;
     Controls playerControls;
+    ControlsInitial initialControls;
     Mcs mcs;
     SmallEnemy smallEnemy;
+    Game g;
     private int delay;
     private Picture hitImage;
     private Score score;
@@ -26,7 +28,19 @@ public class Game {
     public Game(int delay) throws InterruptedException {
         Thread.sleep(delay);
         this.delay = delay;
-        field = new Field(1000, 1000);
+        initialScreen();
+
+    }
+
+    public void initialScreen() {
+
+        field = new Field(1000, 1000, "BugEvaders/resources/background.jpeg");
+        initialControls = new ControlsInitial(this);
+    }
+
+    public void gameScreen() {
+
+        field = new Field(1000, 1000, "BugEvaders/resources/background2.jpeg");
         player = new Player(450, 880, bugs);
         playerControls = new Controls(player);
         EnemiesFactory.getNewEnemy(enemies);
@@ -35,6 +49,7 @@ public class Game {
         score = new Score("Score", enemies);
         score2 = new Score("Highscore", enemies);
     }
+
 
     public void run() throws InterruptedException {
         while (true) {
@@ -47,13 +62,16 @@ public class Game {
                     bug.moveUp();
                     for (Enemy enemy : enemies) {
                         if (bug.checkCollision(enemy)) {
-                            enemy.destroy();
+                            enemy.hit(1);
+                            if (enemy.isDestroyed()) {
+                                enemy.destroy();
+                                enemies.remove(enemy);
+                            }
                             bug.delete();
-                            enemies.remove(enemy);
                             bugs.remove(bug);
+                            score.updateScore();
                             this.hitImage = new Picture(bug.getPosition().getX(), bug.getPosition().getY(), "BugEvaders/resources/explosion.png");
                             this.hitImage.draw();
-                            score.updateScore();
                             Thread.sleep(20);
                             this.hitImage.delete();
                         }
