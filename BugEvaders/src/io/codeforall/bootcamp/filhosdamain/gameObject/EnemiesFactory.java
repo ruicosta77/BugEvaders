@@ -8,50 +8,64 @@ public class EnemiesFactory {
 
 
     public static void getNewEnemy(ArrayList<Enemy> arraylist) {
-        Enemy enemies;
         int random = (int) (Math.random() * 3);
         switch (random){
             case 0:
-                arraylist.add(new SmallEnemy(100, 300));
-                arraylist.add(new SmallEnemy(450, 300));
-                arraylist.add(new SmallEnemy(900, 300));
-
-                arraylist.add(new SmallEnemy(200, 450));
-                arraylist.add(new SmallEnemy(550, 450));
-                arraylist.add(new SmallEnemy(800, 400));
-
-                arraylist.add(new SmallEnemy(700, 600));
-                arraylist.add(new SmallEnemy(650, 600));
-                arraylist.add(new SmallEnemy(300, 600));
-
-
+                pattern1(arraylist);
                 break;
             case 1:
-                arraylist.add(new SmallEnemy(50, 300));
-                arraylist.add(new SmallEnemy(500, 300));
-                arraylist.add(new SmallEnemy(950, 300));
-
-                arraylist.add(new SmallEnemy(150, 450));
-                arraylist.add(new SmallEnemy(550, 450));
-                arraylist.add(new SmallEnemy(800, 400));
-
-                arraylist.add(new SmallEnemy(300, 600));
-                arraylist.add(new SmallEnemy(600, 600));
-                arraylist.add(new SmallEnemy(900, 600));
+                pattern2(arraylist);
                 break;
             case 2:
-                arraylist.add(new SmallEnemy(100, 300));
-                arraylist.add(new SmallEnemy(450, 300));
-                arraylist.add(new SmallEnemy(900, 300));
-
-                arraylist.add(new SmallEnemy(150, 450));
-                arraylist.add(new SmallEnemy(550, 450));
-                arraylist.add(new SmallEnemy(800, 400));
-
-                arraylist.add(new SmallEnemy(700, 600));
-                arraylist.add(new SmallEnemy(650, 600));
-                arraylist.add(new SmallEnemy(300, 600));
-                break;
+               pattern3(arraylist);
+            break;
         }
     }
+
+    private static void pattern1(ArrayList<Enemy> arraylist) {
+        int x = 50;
+        int y = 100;
+        for (int i = 0; i < 40; i++) {
+            arraylist.add(new SmallEnemy(x, y));
+            x += 100;
+            if (x >= 1000) {
+                x = 50;
+                y += 100;
+            }
+        }
+    }
+
+
+
+    private static void pattern2(ArrayList<Enemy> arraylist) {
+        int x = 100;
+        int y = 250;
+        for (int i = 0; i < 40; i++) {
+            arraylist.add(new SmallEnemy(x, y));
+            x += 100;
+            if (x >= 1000) {
+                x = 100;
+                y += 100;
+            }
+        }
+    }
+
+
+
+
+    private static void pattern3(ArrayList<Enemy> arraylist) {
+        int x = 50;
+        int y = 300;
+        for (int i = 0; i < 40; i++) {
+            arraylist.add(new SmallEnemy(x, y));
+            x += 100;
+            if (x >= 1000) {
+                x = 50;
+                y += 100;
+            }
+        }
+    }
+
+
+
 }

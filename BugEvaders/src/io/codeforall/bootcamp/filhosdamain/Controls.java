@@ -1,20 +1,16 @@
 package io.codeforall.bootcamp.filhosdamain;
 
-import io.codeforall.bootcamp.filhosdamain.gameObject.BugProjectile;
-import io.codeforall.bootcamp.filhosdamain.gameObject.Mcs;
-import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
+import io.codeforall.bootcamp.filhosdamain.gameObject.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-
-import java.util.LinkedList;
-
 public class Controls implements KeyboardHandler {
 
     private Player player;
     private boolean rightPressed = false;
     private boolean leftPressed = false;
+
     private boolean spacePressed = false;
 
     public Controls(Player player) {
@@ -28,9 +24,6 @@ public class Controls implements KeyboardHandler {
         }
         if (leftPressed) {
             player.moveLeft();
-        }
-        if (spacePressed) {
-            player.shoot();
         }
     }
 
@@ -52,7 +45,6 @@ public class Controls implements KeyboardHandler {
         spaceEvent.setKey(KeyboardEvent.KEY_SPACE);
         keyboard.addEventListener(spaceEvent);
 
-
         KeyboardEvent rightEvent2 = new KeyboardEvent();
         rightEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         rightEvent2.setKey(KeyboardEvent.KEY_RIGHT);
@@ -62,11 +54,6 @@ public class Controls implements KeyboardHandler {
         leftEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         leftEvent2.setKey(KeyboardEvent.KEY_LEFT);
         keyboard.addEventListener(leftEvent2);
-
-        KeyboardEvent spaceEvent2 = new KeyboardEvent();
-        spaceEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-        spaceEvent2.setKey(KeyboardEvent.KEY_SPACE);
-        keyboard.addEventListener(spaceEvent2);
     }
 
     @Override
@@ -78,9 +65,9 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_LEFT:
                 leftPressed = true;
                 break;
-
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = true;
+                player.shoot();
                 break;
         }
         updatePaddles();
@@ -95,7 +82,6 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_LEFT:
                 leftPressed = false;
                 break;
-
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = false;
                 break;
@@ -103,3 +89,4 @@ public class Controls implements KeyboardHandler {
         updatePaddles();
     }
 }
+

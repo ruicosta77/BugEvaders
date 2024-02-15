@@ -11,7 +11,7 @@ public abstract class Enemy implements Hitable {
     private int enemyY;
     private Position position;
     protected Picture enemyImage;
-    public final int ENEMY_SPEED = 5;
+    public final int ENEMY_SPEED = 2;
     private static int  random = 1;
 
     public Enemy(int x, int y) {

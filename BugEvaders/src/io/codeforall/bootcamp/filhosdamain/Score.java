@@ -8,54 +8,45 @@ import java.util.ArrayList;
 
 public class Score {
 
-
     private String name;
-    protected int score;
-    protected static int highScore = 0;
-    protected Text text = new Text(250,100, toString());
+    private int score;
+    private static int highScore;
+    private Text scoreText;
+    private Text highScoreText;
     private ArrayList<Enemy> enemies;
 
-
-    public Score(String name , ArrayList enemy) {
+    public Score(String name, ArrayList<Enemy> enemies) {
         this.name = name;
-        this.enemies = enemy;
-        text.setColor(Color.ORANGE);
-        text.grow(30,30);
-        text.draw();
+        this.enemies = enemies;
+
+        scoreText = new Text(850, 80, "SCORE: " + score);
+        highScoreText = new Text(850, 100, "HIGHSCORE: " + highScore);
+
+        scoreText.setColor(Color.ORANGE);
+        highScoreText.setColor(Color.ORANGE);
+
+        scoreText.draw();
+        highScoreText.draw();
+    }
+    public void updateScore() {
+        setScore(score + 10);
+        scoreText.setText("SCORE: " + score);
+        if (score > highScore) {
+            setHighScore(score);
+            highScoreText.setText("HIGHSCORE: " + highScore);
+        }
     }
 
-    public int scoreKeeper() {
-       for (Enemy enemy : enemies) {
-           if (enemy.isAlive()) {
-               score++;
-           }
-           if (score > highScore){
-               highScore = score;
-           }
-           text.setText(toString());
-           text.delete();
-           text.draw();
-
-       }
-       return 0;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-
-    public String toString(int highScore) {
-        return "HIGHSCORE: " + highScore;
+    public static void setHighScore(int highScore) {
+        Score.highScore = highScore;
     }
 
-    public String toString(Integer score) {
-        return "SCORE: " + score;
+    public void delete() {
+        scoreText.delete();
+        highScoreText.delete();
     }
-
-    @Override
-    public String toString() {
-        return ""+score;
-    }
-
-    public void delete(){
-        text.delete();
-    }
-
 }

@@ -17,7 +17,6 @@ public class Game {
     SmallEnemy smallEnemy;
     private int delay;
     private Picture hitImage;
-
     private Score score;
     private Score score2;
 
@@ -25,26 +24,19 @@ public class Game {
     public ArrayList<Enemy> enemies = new ArrayList<>();
 
     public Game(int delay) throws InterruptedException {
-
         Thread.sleep(delay);
         this.delay = delay;
         field = new Field(1000, 1000);
-        player = new Player(450, 900, bugs);
+        player = new Player(450, 880, bugs);
         playerControls = new Controls(player);
         EnemiesFactory.getNewEnemy(enemies);
-        mcs = new Mcs(450, 200);
+        mcs = new Mcs(450, 150);
         enemies.add(mcs);
         score = new Score("Score", enemies);
         score2 = new Score("Highscore", enemies);
-        score2.toString();
-        score.scoreKeeper();
-        score.toString();
-        score.toString(10);
-
     }
 
     public void run() throws InterruptedException {
-
         while (true) {
             try {
                 Thread.sleep(delay);
@@ -61,7 +53,9 @@ public class Game {
                             bugs.remove(bug);
                             this.hitImage = new Picture(bug.getPosition().getX(), bug.getPosition().getY(), "BugEvaders/resources/explosion.png");
                             this.hitImage.draw();
-
+                            score.updateScore();
+                            Thread.sleep(20);
+                            this.hitImage.delete();
                         }
                     }
                 }
