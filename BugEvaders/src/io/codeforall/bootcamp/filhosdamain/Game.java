@@ -21,6 +21,7 @@ public class Game {
     private Picture hitImage;
     private Score score;
     private Score score2;
+    Lifes life;
 
     public LinkedList<BugProjectile> bugs = new LinkedList<>();
     public ArrayList<Enemy> enemies = new ArrayList<>();
@@ -48,6 +49,7 @@ public class Game {
         enemies.add(mcs);
         //score = new Score("Score");
         score2 = new Score("Highscore");
+        life = new Lifes(3);
     }
 
 
