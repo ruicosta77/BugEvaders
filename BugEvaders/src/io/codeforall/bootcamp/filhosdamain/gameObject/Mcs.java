@@ -36,7 +36,10 @@ public class Mcs extends Enemy implements Shootable, Hitable {
 
     @Override
     public boolean isAlive() {
-        return health > 0;
+        if(this.health <= 0){
+            return false;
+        }
+        return true;
     }
 
 

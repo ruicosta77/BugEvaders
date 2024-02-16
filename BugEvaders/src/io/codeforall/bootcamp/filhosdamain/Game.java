@@ -46,13 +46,14 @@ public class Game {
         EnemiesFactory.getNewEnemy(enemies);
         mcs = new Mcs(450, 150);
         enemies.add(mcs);
-        score = new Score("Score", enemies);
-        score2 = new Score("Highscore", enemies);
+        //score = new Score("Score");
+        score2 = new Score("Highscore");
     }
 
 
     public void run() throws InterruptedException {
         while (true) {
+
             try {
                 Thread.sleep(delay);
                 for (Enemy enemy : enemies) {
@@ -61,6 +62,14 @@ public class Game {
                 for (BugProjectile bug : bugs) {
                     bug.moveUp();
                     for (Enemy enemy : enemies) {
+
+                        if (!player.isAlive()){
+                            System.exit(0); // change to lose screen
+                        }
+                        if (!mcs.isAlive()){
+                            System.exit(0); // change to win screen
+                        }
+
                         if (bug.checkCollision(enemy)) {
                             enemy.hit(1);
                             if (enemy.isDestroyed()) {
@@ -69,7 +78,6 @@ public class Game {
                             }
                             bug.delete();
                             bugs.remove(bug);
-                            score.updateScore();
                             this.hitImage = new Picture(bug.getPosition().getX(), bug.getPosition().getY(), "BugEvaders/resources/explosion.png");
                             this.hitImage.draw();
                             Thread.sleep(20);

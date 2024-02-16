@@ -8,7 +8,7 @@ public class EnemiesFactory {
 
 
     public static void getNewEnemy(ArrayList<Enemy> arraylist) {
-        int random = (int) (Math.random() * 3);
+        int random = (int) (Math.random() * 2);
         switch (random){
             case 0:
                 pattern1(arraylist);

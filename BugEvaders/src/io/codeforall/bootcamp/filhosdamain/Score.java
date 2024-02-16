@@ -9,15 +9,13 @@ import java.util.ArrayList;
 public class Score {
 
     private String name;
-    private int score = 500;
+    private int score = 1000;
     private static int highScore;
     private Text scoreText;
     private Text highScoreText;
-    private ArrayList<Enemy> enemies;
 
-    public Score(String name, ArrayList<Enemy> enemies) {
+    public Score(String name){
         this.name = name;
-        this.enemies = enemies;
 
         scoreText = new Text(850, 70, "SCORE: ");
         highScoreText = new Text(850, 100, "HIGHSCORE: ");
@@ -30,7 +28,7 @@ public class Score {
         highScoreText.draw();
     }
     public void updateScore() {
-        setScore(score - 10);
+        setScore(score - 1);
         scoreText.setText("SCORE: " + score);
         if (score > highScore) {
             setHighScore(score);
@@ -49,5 +47,9 @@ public class Score {
     public void delete() {
         scoreText.delete();
         highScoreText.delete();
+    }
+
+    public int getScore() {
+        return score;
     }
 }

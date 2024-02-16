@@ -1,5 +1,6 @@
 package io.codeforall.bootcamp.filhosdamain.gameObject;
 
+import io.codeforall.bootcamp.filhosdamain.Score;
 import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import io.codeforall.bootcamp.filhosdamain.interfaces.Shootable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -15,6 +16,7 @@ public class Player implements Hitable, Shootable {
     private int playerY;
     private Picture playerImage;
     private LinkedList<BugProjectile> projectiles;
+    private Score score;
 
     private boolean playerShoot;
 
@@ -24,6 +26,7 @@ public class Player implements Hitable, Shootable {
         this.playerImage = new Picture(x, y, "BugEvaders/resources/igorpng2.png");
         this.playerImage.draw();
         this.projectiles = projectiles;
+        this.score = new Score("Score");
     }
 
     public void moveRight() {
@@ -41,6 +44,7 @@ public class Player implements Hitable, Shootable {
     }
 
     public void shoot() {
+        score.updateScore();
         Position projectilePosition = new Position(playerX + playerImage.getWidth() / 2, playerY);
         BugProjectile projectile = new BugProjectile(projectilePosition);
         projectiles.add(projectile);
@@ -57,7 +61,10 @@ public class Player implements Hitable, Shootable {
 
     @Override
     public boolean isAlive() {
-        return false;
+        if(this.score.getScore() <= 0){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -69,5 +76,7 @@ public class Player implements Hitable, Shootable {
                 ", projectiles=" + projectiles +
                 '}';
     }
+
+
 }
 
