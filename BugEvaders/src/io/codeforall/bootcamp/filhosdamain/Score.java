@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Score {
 
     private String name;
-    private int score = 2000;
+    private int score = 500;
     private static int highScore;
     private Text scoreText;
     private Text highScoreText;
@@ -19,12 +19,13 @@ public class Score {
         this.name = name;
         this.enemies = enemies;
 
-        scoreText = new Text(850, 80, "SCORE: ");
+        scoreText = new Text(850, 70, "SCORE: ");
         highScoreText = new Text(850, 100, "HIGHSCORE: ");
 
-        scoreText.setColor(Color.ORANGE);
-        highScoreText.setColor(Color.ORANGE);
-
+        scoreText.setColor(Color.GREEN);
+        highScoreText.setColor(Color.GREEN);
+        scoreText.grow(20,15);
+        highScoreText.grow(20,15);
         scoreText.draw();
         highScoreText.draw();
     }

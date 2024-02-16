@@ -16,15 +16,12 @@ public class EnemiesFactory {
             case 1:
                 pattern2(arraylist);
                 break;
-            case 2:
-               pattern3(arraylist);
-            break;
         }
     }
 
     private static void pattern1(ArrayList<Enemy> arraylist) {
         int x = 50;
-        int y = 100;
+        int y = 300;
         for (int i = 0; i < 40; i++) {
             arraylist.add(new SmallEnemy(x, y));
             x += 100;
@@ -49,23 +46,4 @@ public class EnemiesFactory {
             }
         }
     }
-
-
-
-
-    private static void pattern3(ArrayList<Enemy> arraylist) {
-        int x = 50;
-        int y = 300;
-        for (int i = 0; i < 40; i++) {
-            arraylist.add(new SmallEnemy(x, y));
-            x += 100;
-            if (x >= 1000) {
-                x = 50;
-                y += 100;
-            }
-        }
-    }
-
-
-
 }

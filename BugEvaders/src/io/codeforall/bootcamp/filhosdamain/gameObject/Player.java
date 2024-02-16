@@ -16,6 +16,8 @@ public class Player implements Hitable, Shootable {
     private Picture playerImage;
     private LinkedList<BugProjectile> projectiles;
 
+    private boolean playerShoot;
+
     public Player(int x, int y, LinkedList<BugProjectile> projectiles) {
         this.playerX = x;
         this.playerY = y;
@@ -42,6 +44,10 @@ public class Player implements Hitable, Shootable {
         Position projectilePosition = new Position(playerX + playerImage.getWidth() / 2, playerY);
         BugProjectile projectile = new BugProjectile(projectilePosition);
         projectiles.add(projectile);
+    }
+
+    public boolean getShoot(){
+        return this.playerShoot;
     }
 
     @Override
