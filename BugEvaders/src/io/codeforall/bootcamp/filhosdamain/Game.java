@@ -31,14 +31,14 @@ public class Game {
     public ArrayList<Player> players = new ArrayList<>();
 
     public Game(int delay) throws InterruptedException {
-        Thread.sleep(delay);
+        // Thread.sleep(delay);
         this.delay = delay;
         initialScreen();
     }
 
     public void initialScreen() {
 
-        field = new Field(1000, 1000, "BugEvaders/resources/background.jpeg");
+        field = new Field(1000, 1000, "BugEvaders/resources/initialMenu.jpg");
         initialControls = new ControlsInitial(this);
     }
 
@@ -60,6 +60,7 @@ public class Game {
         while (true) {
 
             try {
+
                 Thread.sleep(delay);
 
                 for (Enemy enemy : enemies) {
@@ -68,21 +69,27 @@ public class Game {
 
                 for (McBullet mcBullet : mcBullets) {
                     mcBullet.moveDown();
-                    for (Player player : players) {
-                        if (mcBullet.checkCollision(player)) {
-                            player.hit(1);
-                            removeLifes();
-                            if (player.isDestroyed()) {
-                                player.destroy();
-                                players.remove(player);
+                    if(mcBullet.getPosition().getY() >= 1200){
+                        mcBullet.delete();
+                        mcBullets.remove(mcBullet);
+                    }else{
+                        for (Player player : players) {
 
+                            if (mcBullet.checkCollision(player)) {
+                                player.hit(1);
+                                removeLifes();
+                                if (player.isDestroyed()) {
+                                    player.destroy();
+                                    players.remove(player);
+
+                                }
+                                mcBullet.delete();
+                                mcBullets.remove(mcBullet);
+                                this.hitImage = new Picture(mcBullet.getPosition().getX(), mcBullet.getPosition().getY(), "BugEvaders/resources/explosion.png");
+                                this.hitImage.draw();
+                                Thread.sleep(20);
+                                this.hitImage.delete();
                             }
-                            mcBullet.delete();
-                            mcBullets.remove(mcBullet);
-                            this.hitImage = new Picture(mcBullet.getPosition().getX(), mcBullet.getPosition().getY(), "BugEvaders/resources/explosion.png");
-                            this.hitImage.draw();
-                            Thread.sleep(20);
-                            this.hitImage.delete();
                         }
                     }
                 }

@@ -61,6 +61,10 @@ public class Player{
     }
 
     public void shoot() {
+        if(!isAlive()){
+            loseScreen = new Field(1000,1000,"BugEvaders/resources/loseScreen.jpg");
+            isDestroyed = true;
+        }
         score.updateScore();
         Position projectilePosition = new Position(playerX + playerImage.getWidth() / 2, playerY);
         BugProjectile projectile = new BugProjectile(projectilePosition);
