@@ -1,12 +1,9 @@
 package io.codeforall.bootcamp.filhosdamain.gameObject;
 
-import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.filhosdamain.positions.Position;
 
-import java.awt.*;
-
-public abstract class Enemy implements Hitable {
+public abstract class Enemy{
     private int enemyX;
     private int enemyY;
     private Position position;

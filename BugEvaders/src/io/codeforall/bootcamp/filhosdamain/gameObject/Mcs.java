@@ -1,28 +1,47 @@
 package io.codeforall.bootcamp.filhosdamain.gameObject;
 
-import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
-import io.codeforall.bootcamp.filhosdamain.interfaces.Shootable;
+import io.codeforall.bootcamp.filhosdamain.gameArea.Field;
 import io.codeforall.bootcamp.filhosdamain.positions.Position;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
 
 
-public class Mcs extends Enemy implements Shootable, Hitable {
+public class Mcs extends Enemy {
 
     private int health;
+    private int mcX;
+    private int mcY;
+    Position position;
     private boolean isDestroyed;
     private static int random = 1;
-    private LinkedList<SlidesProjectile> projectiles;
+    private LinkedList<McBullet> mcProjectiles;
+    Field winScreen;
 
-    public Mcs(int x, int y) {
+    public Mcs(int x, int y, LinkedList<McBullet> mcProjectiles) {
         super(x, y);
         this.health = 5;
-        enemyImage = new Picture(x, y, "BugEvaders/resources/villian2.png");
+        this.mcX = x;
+        this.mcY = y;
+        this.position = new Position(x,y);
+        this.mcProjectiles = mcProjectiles;
+
+        int mcRandom = (int)(Math.random()*4);
+        switch (mcRandom){
+            case 0: enemyImage = new Picture(x, y, "BugEvaders/resources/mc3.png");
+            break;
+            case 1: enemyImage = new Picture(x,y,"BugEvaders/resources/mc1.png");
+            break;
+            case 2: enemyImage = new Picture(x,y,"BugEvaders/resources/mc2.png");
+            break;
+            case 3: enemyImage = new Picture(x,y ,"BugEvaders/resources/mc4.png");
+            break;
+        }
+
         enemyImage.draw();
     }
 
-    @Override
+
     public void shoot() {
     }
 
@@ -30,13 +49,16 @@ public class Mcs extends Enemy implements Shootable, Hitable {
     public void hit(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
+            Field winScreen = new Field(1000,1000,"BugEvaders/resources/winScreen.jpg");
             isDestroyed = true;
         }
     }
 
-    @Override
+
     public boolean isAlive() {
         if(this.health <= 0){
+            System.out.println("teste win screen");
+            Field winScreen = new Field(1000,1000,"BugEvaders/resources/winScreen.jpg");
             return false;
         }
         return true;
@@ -61,13 +83,25 @@ public class Mcs extends Enemy implements Shootable, Hitable {
         }
     }
 
+    public void destroy(){
+        enemyImage.delete();
+    }
+
     public void shootMcs() {
-        Position projectilePosition = new Position(getEnemyX(), getEnemyY());
-        SlidesProjectile projectile = new SlidesProjectile(projectilePosition);
-        projectiles.add(projectile);
+        Position projectilePosition = new Position(getEnemyX() + enemyImage.getWidth() / 2, getEnemyY());
+        McBullet projectile = new McBullet(projectilePosition);
+        mcProjectiles.add(projectile);
     }
 
     public boolean isDestroyed() {
         return isDestroyed;
+    }
+
+    public int getMcX() {
+        return mcX;
+    }
+
+    public int getMxY() {
+        return mcY;
     }
 }

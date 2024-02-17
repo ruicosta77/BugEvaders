@@ -1,20 +1,20 @@
-package io.codeforall.bootcamp.filhosdamain;
+package io.codeforall.bootcamp.filhosdamain.controlsFiles;
 
-import io.codeforall.bootcamp.filhosdamain.gameObject.Player;
+import io.codeforall.bootcamp.filhosdamain.Game;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 
-public class ControlsInitial implements KeyboardHandler {
+public class ControlsFinal implements KeyboardHandler {
 
     private Game g;
-    private boolean spacePressed = false;
+    private boolean replayPressed = false;
     private boolean quitPressed = false;
     private static boolean isGameRunning = false;
 
-    public ControlsInitial(Game g) {
+    public ControlsFinal(Game g) {
         this.g = g;
         init();
     }
@@ -23,10 +23,10 @@ public class ControlsInitial implements KeyboardHandler {
     private void init() {
         Keyboard keyboard = new Keyboard(this);
 
-        KeyboardEvent playEvent = new KeyboardEvent();
-        playEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        playEvent.setKey(KeyboardEvent.KEY_P);
-        keyboard.addEventListener(playEvent);
+        KeyboardEvent replayEvent = new KeyboardEvent();
+        replayEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        replayEvent.setKey(KeyboardEvent.KEY_R);
+        keyboard.addEventListener(replayEvent);
 
         KeyboardEvent quitEvent = new KeyboardEvent();
         quitEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -38,9 +38,9 @@ public class ControlsInitial implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_P:
+            case KeyboardEvent.KEY_R:
                 if (!isGameRunning) {
-                    spacePressed = true;
+                    replayPressed = true;
                     g.gameScreen();
                     isGameRunning = true;
                     break;
@@ -55,8 +55,8 @@ public class ControlsInitial implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_P:
-                spacePressed = false;
+            case KeyboardEvent.KEY_R:
+                replayPressed = false;
                 break;
             case KeyboardEvent.KEY_Q:
                 quitPressed = false;

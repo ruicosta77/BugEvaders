@@ -1,9 +1,8 @@
 package io.codeforall.bootcamp.filhosdamain.gameObject;
 
-import io.codeforall.bootcamp.filhosdamain.interfaces.Hitable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class SmallEnemy extends Enemy implements Hitable {
+public class SmallEnemy extends Enemy{
 
     private int health;
 
@@ -18,7 +17,6 @@ public class SmallEnemy extends Enemy implements Hitable {
         enemyImage.draw();
     }
 
-    @Override
     public void hit(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
@@ -29,7 +27,6 @@ public class SmallEnemy extends Enemy implements Hitable {
     public boolean isDestroyed() {
         return isDestroyed;
     }
-    @Override
     public boolean isAlive() {
         return health > 0;
     }

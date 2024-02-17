@@ -1,4 +1,4 @@
-package io.codeforall.bootcamp.filhosdamain;
+package io.codeforall.bootcamp.filhosdamain.controlsFiles;
 
 import io.codeforall.bootcamp.filhosdamain.gameObject.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -8,13 +8,15 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class Controls implements KeyboardHandler {
 
     private Player player;
+    private Mcs mcs;
     private boolean rightPressed = false;
     private boolean leftPressed = false;
 
     private boolean spacePressed = false;
 
-    public Controls(Player player) {
+    public Controls(Player player, Mcs mcs) {
         this.player = player;
+        this.mcs = mcs;
         init();
     }
 
@@ -68,6 +70,7 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = true;
                 player.shoot();
+                //mcs.shootMcs();
                 break;
         }
         updatePaddles();
