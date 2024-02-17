@@ -38,7 +38,7 @@ public class Player{
                 break;
             case 2: this.playerImage = new Picture(x,y,"BugEvaders/resources/player3.png");
                 break;
-            case 3: this.playerImage = new Picture(x,y ,"BugEvaders/resources/player4. p ng ");
+            case 3: this.playerImage = new Picture(x,y ,"BugEvaders/resources/player4.png ");
                 break;
         }
 
