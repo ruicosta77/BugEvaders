@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class EnemiesFactory {
 
-
     public static void getNewEnemy(ArrayList<Enemy> arraylist) {
         int random = (int) (Math.random() * 2);
         switch (random){
@@ -31,8 +30,6 @@ public class EnemiesFactory {
             }
         }
     }
-
-
 
     private static void pattern2(ArrayList<Enemy> arraylist) {
         int x = 100;

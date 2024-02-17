@@ -21,12 +21,12 @@ public class Game {
     private int delay;
     private Picture hitImage;
     private Score score;
-    private Score score2;
     Lifes life;
+    Lifes life1;
+    Lifes life2;
 
     public LinkedList<BugProjectile> bugs = new LinkedList<>();
     public ArrayList<Enemy> enemies = new ArrayList<>();
-    //public ArrayList<Lifes> lifes = new ArrayList<>();
     public LinkedList<McBullet> mcBullets = new LinkedList<>();
     public ArrayList<Player> players = new ArrayList<>();
 
@@ -34,7 +34,6 @@ public class Game {
         Thread.sleep(delay);
         this.delay = delay;
         initialScreen();
-
     }
 
     public void initialScreen() {
@@ -50,87 +49,29 @@ public class Game {
         enemies.add(mcs);
         playerControls = new Controls(player, mcs);
         EnemiesFactory.getNewEnemy(enemies);
-        score = new Score("Score");
-        score2 = new Score("Highscore");
-       // lifes.add(new Lifes(3));
+        score = new Score("Bullets");
         players.add(player);
+        life = new Lifes(50,50);
+        life1 = new Lifes(100,50);
+        life2 = new Lifes(150,50);
     }
-
-    public void mcRandomShoot() {
-        while (player.isAlive()) {
-            int random = (int) (Math.random() * 100);
-            if (random < 20) {
-                mcs.shootMcs();
-            }
-        }
-    }
-
 
     public void run() throws InterruptedException {
-//        while (true) {
-//
-//            try {
-//                Thread.sleep(delay);
-//                int random = (int) (Math.random() * 100);
-//
-//                for (McBullet mcBullet : mcBullets) {
-//                    mcBullet.moveDown();
-//                    if (mcBullet.checkCollision(player)) {
-//                        player.hit(1);
-//                        if (player.isDestroyed()) {
-//                            player.destroy();
-//                            enemies.remove(player);
-//                        }
-//                        mcBullet.delete();
-//                        mcBullets.remove(mcBullet);
-//                        this.hitImage = new Picture(mcBullet.getPosition().getX(), mcBullet.getPosition().getY(), "BugEvaders/resources/explosion.png");
-//                        this.hitImage.draw();
-//                        Thread.sleep(20);
-//                        this.hitImage.delete();
-//                    }
-//                }
-//                for (BugProjectile bug : bugs) {
-//                    bug.moveUp();
-//                    for (Enemy enemy : enemies) {
-//                        if (bug.checkCollision(enemy)) {
-//                            enemy.hit(1);
-//                            if (enemy.isDestroyed()) {
-//                                enemy.destroy();
-//                                enemies.remove(enemy);
-//                            }
-//                            if (enemy instanceof Mcs) {
-//                                int McsProjectile = (int) (Math.random() * 5);
-//                                while (McsProjectile > 0) {
-//                                    ((Mcs) enemy).shootMcs();
-//                                    McsProjectile--;
-//
-//                                    bug.delete();
-//                                    bugs.remove(bug);
-//                                    this.hitImage = new Picture(bug.getPosition().getX(), bug.getPosition().getY(), "BugEvaders/resources/explosion.png");
-//                                    this.hitImage.draw();
-//                                    Thread.sleep(20);
-//                                    this.hitImage.delete();
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            } catch (ConcurrentModificationException e) {
-//            }
-//        }
-//
-//    }
         while (true) {
 
             try {
                 Thread.sleep(delay);
 
+                for (Enemy enemy : enemies) {
+                    enemy.movement();
+                }
+
                 for (McBullet mcBullet : mcBullets) {
                     mcBullet.moveDown();
                     for (Player player : players) {
-                        System.out.println("player loop");
                         if (mcBullet.checkCollision(player)) {
                             player.hit(1);
+                            removeLifes();
                             if (player.isDestroyed()) {
                                 player.destroy();
                                 players.remove(player);
@@ -146,19 +87,9 @@ public class Game {
                     }
                 }
 
-                for (Enemy enemy : enemies) {
-                    enemy.movement();
-                }
                 for (BugProjectile bug : bugs) {
                     bug.moveUp();
                     for (Enemy enemy : enemies) {
-
-                        if (!player.isAlive()){
-                            //System.exit(0); // change to lose screen
-                        }
-                        if (!mcs.isAlive()){
-                            //System.exit(0); // change to win screen
-                        }
 
                         if (bug.checkCollision(enemy)) {
                             enemy.hit(1);
@@ -168,7 +99,6 @@ public class Game {
                             }
                             bug.delete();
                             bugs.remove(bug);
-                            //iio exception here
                             this.hitImage = new Picture(bug.getPosition().getX(), bug.getPosition().getY(), "BugEvaders/resources/explosion.png");
                             this.hitImage.draw();
                             Thread.sleep(20);
@@ -177,6 +107,22 @@ public class Game {
                     }
                 }
             } catch (ConcurrentModificationException e) {
+            }
+        }
+    }
+
+    public void removeLifes (){
+        for (Player player : players){
+            switch (player.getHealth()){
+                case 2:
+                    life2.remove();
+                    break;
+                case 1:
+                    life1.remove();
+                    break;
+                case 0:
+                    life.remove();
+                    break;
             }
         }
     }

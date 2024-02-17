@@ -20,9 +20,7 @@ public class McBullet {
         }
 
         public boolean checkCollision(Player player) {
-            //return player.getPlayerX() >= (this.getPosition().getX()) && ((player.getPlayerX())  + (player.getPlayerImage().getWidth()) >= this.getPosition().getX() && player.getPlayerY() == this.getPosition().getY());
-            return player.getPlayerX() <= (this.getPosition().getX()) && ((player.getPlayerX())  + (player.getPlayerImage().getWidth()) <= this.getPosition().getX() && player.getPlayerY() == this.getPosition().getY());
-
+            return player.getPosition().getX() <= (this.getPosition().getX()) && (player.getPosition().getX() + player.getPlayerImage().getWidth()) >= this.getPosition().getX() && player.getPosition().getY() == this.getPosition().getY();
         }
 
         public void delete() {

@@ -5,9 +5,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class SmallEnemy extends Enemy{
 
     private int health;
-
-
-
     private  boolean isDestroyed;
 
     public SmallEnemy(int x, int y) {
@@ -26,9 +23,6 @@ public class SmallEnemy extends Enemy{
 
     public boolean isDestroyed() {
         return isDestroyed;
-    }
-    public boolean isAlive() {
-        return health > 0;
     }
 }
 

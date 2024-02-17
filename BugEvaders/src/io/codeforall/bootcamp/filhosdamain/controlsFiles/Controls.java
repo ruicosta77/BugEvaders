@@ -70,7 +70,7 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = true;
                 player.shoot();
-                //mcs.shootMcs();
+                mcs.shootMcs();
                 break;
         }
         updatePaddles();

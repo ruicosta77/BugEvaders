@@ -24,9 +24,6 @@ public class BugProjectile {
         return enemy.getPosition().getX() <= (this.getPosition().getX()) && (enemy.getPosition().getX() + enemy.getPicture().getWidth()) >= this.getPosition().getX() && enemy.getPosition().getY() == this.getPosition().getY();
 
     }
-    public boolean isOutOfBounds() {
-        return position.getY() < 0;
-    }
 
     public void delete() {
         projectileImage.delete();

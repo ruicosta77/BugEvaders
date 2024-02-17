@@ -20,7 +20,7 @@ public class Mcs extends Enemy {
 
     public Mcs(int x, int y, LinkedList<McBullet> mcProjectiles) {
         super(x, y);
-        this.health = 5;
+        this.health = 10;
         this.mcX = x;
         this.mcY = y;
         this.position = new Position(x,y);
@@ -37,15 +37,10 @@ public class Mcs extends Enemy {
             case 3: enemyImage = new Picture(x,y ,"BugEvaders/resources/mc4.png");
             break;
         }
-
         enemyImage.draw();
     }
 
 
-    public void shoot() {
-    }
-
-    @Override
     public void hit(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
@@ -57,7 +52,6 @@ public class Mcs extends Enemy {
 
     public boolean isAlive() {
         if(this.health <= 0){
-            System.out.println("teste win screen");
             Field winScreen = new Field(1000,1000,"BugEvaders/resources/winScreen.jpg");
             return false;
         }

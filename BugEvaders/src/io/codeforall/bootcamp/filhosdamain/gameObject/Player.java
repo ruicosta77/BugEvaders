@@ -21,9 +21,6 @@ public class Player{
     private boolean isDestroyed;
     private Field loseScreen;
 
-
-    private boolean playerShoot;
-
     public Player(int x, int y, LinkedList<BugProjectile> projectiles) {
         this.playerX = x;
         this.playerY = y;
@@ -38,7 +35,7 @@ public class Player{
                 break;
             case 2: this.playerImage = new Picture(x,y,"BugEvaders/resources/player3.png");
                 break;
-            case 3: this.playerImage = new Picture(x,y ,"BugEvaders/resources/player4.png ");
+            case 3: this.playerImage = new Picture(x,y ,"BugEvaders/resources/player4.png");
                 break;
         }
 
@@ -51,6 +48,7 @@ public class Player{
         if (playerX + playerImage.getWidth() < 1000) {
             playerImage.translate(PLAYER_SPEED, 0);
             playerX += PLAYER_SPEED;
+            this.position.setX(playerX);
         }
     }
 
@@ -58,6 +56,7 @@ public class Player{
         if (playerX > 0) {
             playerImage.translate(-PLAYER_SPEED, 0);
             playerX -= PLAYER_SPEED;
+            this.position.setX(playerX);
         }
     }
 
@@ -68,18 +67,12 @@ public class Player{
         projectiles.add(projectile);
     }
 
-    public boolean getShoot(){
-        return this.playerShoot;
-    }
-
-
     public void hit(int damage) {
         this.health -= damage;
         if(this.health <= 0){
             loseScreen = new Field(1000,1000,"BugEvaders/resources/loseScreen.jpg");
             isDestroyed = true;
         }
-
     }
 
 
@@ -109,6 +102,10 @@ public class Player{
 
     public boolean isDestroyed(){
         return isDestroyed;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     @Override
