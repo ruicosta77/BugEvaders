@@ -25,13 +25,13 @@ public class Game {
     Lifes life1;
     Lifes life2;
 
+
     public LinkedList<BugProjectile> bugs = new LinkedList<>();
     public ArrayList<Enemy> enemies = new ArrayList<>();
     public LinkedList<McBullet> mcBullets = new LinkedList<>();
     public ArrayList<Player> players = new ArrayList<>();
 
     public Game(int delay) throws InterruptedException {
-        // Thread.sleep(delay);
         this.delay = delay;
         initialScreen();
     }
@@ -51,9 +51,9 @@ public class Game {
         EnemiesFactory.getNewEnemy(enemies);
         score = new Score("Bullets");
         players.add(player);
-        life = new Lifes(50,50);
-        life1 = new Lifes(100,50);
-        life2 = new Lifes(150,50);
+        life = new Lifes(50, 50);
+        life1 = new Lifes(100, 50);
+        life2 = new Lifes(150, 50);
     }
 
     public void run() throws InterruptedException {
@@ -69,10 +69,10 @@ public class Game {
 
                 for (McBullet mcBullet : mcBullets) {
                     mcBullet.moveDown();
-                    if(mcBullet.getPosition().getY() >= 1200){
+                    if (mcBullet.getPosition().getY() >= 1200) {
                         mcBullet.delete();
                         mcBullets.remove(mcBullet);
-                    }else{
+                    } else {
                         for (Player player : players) {
 
                             if (mcBullet.checkCollision(player)) {
@@ -118,9 +118,9 @@ public class Game {
         }
     }
 
-    public void removeLifes (){
-        for (Player player : players){
-            switch (player.getHealth()){
+    public void removeLifes() {
+        for (Player player : players) {
+            switch (player.getHealth()) {
                 case 2:
                     life2.remove();
                     break;
@@ -133,6 +133,8 @@ public class Game {
             }
         }
     }
+
+
 }
 
 

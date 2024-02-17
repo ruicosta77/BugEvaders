@@ -1,5 +1,6 @@
 package io.codeforall.bootcamp.filhosdamain.controlsFiles;
 
+import io.codeforall.bootcamp.filhosdamain.Game;
 import io.codeforall.bootcamp.filhosdamain.gameObject.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -26,6 +27,10 @@ public class Controls implements KeyboardHandler {
         }
         if (leftPressed) {
             player.moveLeft();
+        }
+        if (spacePressed) {
+            player.shoot();
+            mcs.shootMcs();
         }
     }
 
@@ -56,6 +61,11 @@ public class Controls implements KeyboardHandler {
         leftEvent2.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         leftEvent2.setKey(KeyboardEvent.KEY_LEFT);
         keyboard.addEventListener(leftEvent2);
+
+        KeyboardEvent restartEvent = new KeyboardEvent();
+        restartEvent.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        restartEvent.setKey(KeyboardEvent.KEY_R);
+        keyboard.addEventListener(restartEvent);
     }
 
     @Override
@@ -64,15 +74,15 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_RIGHT:
                 rightPressed = true;
                 leftPressed = false;
+                spacePressed = false;
                 break;
             case KeyboardEvent.KEY_LEFT:
                 leftPressed = true;
                 rightPressed = false;
+                spacePressed = false;
                 break;
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = true;
-                player.shoot();
-                mcs.shootMcs();
                 break;
         }
         updatePaddles();
