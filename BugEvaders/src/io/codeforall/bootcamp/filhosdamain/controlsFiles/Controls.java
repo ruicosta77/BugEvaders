@@ -63,9 +63,11 @@ public class Controls implements KeyboardHandler {
         switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
                 rightPressed = true;
+                leftPressed = false;
                 break;
             case KeyboardEvent.KEY_LEFT:
                 leftPressed = true;
+                rightPressed = false;
                 break;
             case KeyboardEvent.KEY_SPACE:
                 spacePressed = true;
