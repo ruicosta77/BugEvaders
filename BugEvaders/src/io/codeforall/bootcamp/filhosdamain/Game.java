@@ -4,6 +4,8 @@ import io.codeforall.bootcamp.filhosdamain.controlsFiles.Controls;
 import io.codeforall.bootcamp.filhosdamain.controlsFiles.ControlsInitial;
 import io.codeforall.bootcamp.filhosdamain.gameObject.*;
 import io.codeforall.bootcamp.filhosdamain.gameArea.Field;
+import io.codeforall.bootcamp.filhosdamain.sound.AttackSound;
+import io.codeforall.bootcamp.filhosdamain.sound.SoundManager;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class Game {
     Lifes life;
     Lifes life1;
     Lifes life2;
+    public SoundManager backgroudMusic = new SoundManager();
+    public SoundManager attackMusic = new SoundManager();
 
 
     public LinkedList<BugProjectile> bugs = new LinkedList<>();
@@ -57,6 +61,8 @@ public class Game {
     }
 
     public void run() throws InterruptedException {
+        backgroudMusic.startBackgroundMusic();
+
         while (true) {
 
             try {
@@ -78,6 +84,7 @@ public class Game {
                             if (mcBullet.checkCollision(player)) {
                                 player.hit(1);
                                 removeLifes();
+                                attackMusic.playAttackSound();
                                 if (player.isDestroyed()) {
                                     player.destroy();
                                     players.remove(player);
@@ -100,6 +107,7 @@ public class Game {
 
                         if (bug.checkCollision(enemy)) {
                             enemy.hit(1);
+                            attackMusic.playAttackSound();
                             if (enemy.isDestroyed()) {
                                 enemy.destroy();
                                 enemies.remove(enemy);

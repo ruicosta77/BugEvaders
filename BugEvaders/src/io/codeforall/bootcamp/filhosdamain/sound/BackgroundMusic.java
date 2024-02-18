@@ -1,4 +1,4 @@
-/*
+
 package io.codeforall.bootcamp.filhosdamain.sound;
 
 import javax.sound.sampled.*;
@@ -11,7 +11,7 @@ public class BackgroundMusic implements Runnable{
 
     public BackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        AudioInputStream backgroundMusicStream = AudioSystem.getAudioInputStream(new File("resources/Imperial8bit.wav").getAbsoluteFile());
+        AudioInputStream backgroundMusicStream = AudioSystem.getAudioInputStream(new File("BugEvaders/resources/BackgroundMusic.wav").getAbsoluteFile());
         backgroundMusic = AudioSystem.getClip();
         backgroundMusic.open(backgroundMusicStream);
         FloatControl gainControl = (FloatControl) backgroundMusic.getControl(FloatControl.Type.MASTER_GAIN);
@@ -30,4 +30,3 @@ public class BackgroundMusic implements Runnable{
         }
     }
 }
-*/
